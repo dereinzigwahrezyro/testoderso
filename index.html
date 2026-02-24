@@ -228,9 +228,39 @@
       margin-top: 22px; text-align: center;
       font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--muted); letter-spacing: .05em;
     }
+
+    /* ── Enter Screen ── */
+    #enter-screen {
+      position: fixed; inset: 0; z-index: 9999999;
+      background: #000;
+      display: flex;
+      align-items: center; justify-content: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    #enter-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .enter-text {
+      font-family: 'DM Mono', monospace;
+      font-size: .82rem; letter-spacing: .1em;
+      color: rgba(255,255,255,0.6);
+      pointer-events: none;
+      animation: enterFade 2.8s ease-in-out infinite;
+    }
+    @keyframes enterFade {
+      0%,100% { opacity: 0.6; }
+      50%      { opacity: 0.25; }
+    }
   </style>
 </head>
 <body>
+
+<!-- ── Enter Screen ── -->
+<div id="enter-screen" onclick="enterSite()">
+  <span class="enter-text">click to enter...</span>
+</div>
 
 <div id="star-cursor">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -339,7 +369,7 @@ const CONFIG = {
   telegram:  "z390111",
   tracks: [
     { title: "Fighting my Demons", artist: "Ken Carson", src: "Fighting My Demons_spotdown.org.mp3" },
-    { title: "Song 2",    artist: "Artist", src: "" },
+    { title: "NOSTYLIST",    artist: "Destroy Lonley", src: "NOSTYLIST_spotdown.org.mp3" },
   ]
 };
 /* ━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -356,6 +386,19 @@ document.getElementById('telegramLink').href        = `https://t.me/${CONFIG.tel
 // Profilbild setzen
 if (CONFIG.profilePicture && CONFIG.profilePicture.trim() !== '') {
   document.getElementById('avatarImg').src = CONFIG.profilePicture;
+}
+
+// Enter Screen
+function enterSite() {
+  document.getElementById('enter-screen').classList.add('hidden');
+  // Autoplay ersten Track wenn src gesetzt
+  if (CONFIG.tracks[0].src) {
+    playing = true;
+    audio.src = CONFIG.tracks[0].src;
+    audio.play().catch(() => {});
+    vinyl.classList.add('playing');
+    document.getElementById('playIcon').innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+  }
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━
