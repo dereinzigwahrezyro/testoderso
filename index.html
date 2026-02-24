@@ -360,6 +360,7 @@
 const CONFIG = {
   username:  "zyro",
   status:    "online",
+  avatarUrl: "https://imgur.com/a/0W5IauV",  // ← URL hier eintragen
   namemc:    "lange",
   discord:   "zyrolein",
   discordId: "304354137192267777",
@@ -372,6 +373,7 @@ const CONFIG = {
 /* ━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 document.getElementById('usernameEl').textContent   = CONFIG.username;
+if (CONFIG.avatarUrl) document.getElementById('avatarImg').src = CONFIG.avatarUrl;
 document.getElementById('statusText').textContent   = CONFIG.status;
 document.getElementById('namemcUser').textContent   = CONFIG.namemc;
 document.getElementById('namemcLink').href          = `https://namemc.com/profile/${CONFIG.namemc}`;
