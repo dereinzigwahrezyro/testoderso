@@ -29,7 +29,6 @@
       cursor: none !important;
     }
 
-    /* ── Star cursor ── */
     #star-cursor {
       position: fixed;
       top: -100px; left: -100px;
@@ -82,7 +81,6 @@
 
     .top-row { display: flex; align-items: center; gap: 20px; margin-bottom: 28px; }
 
-    /* ── Avatar mit Upload ── */
     .avatar-wrap {
       position: relative; flex-shrink: 0;
       transform: translateZ(28px);
@@ -91,22 +89,7 @@
       width: 72px; height: 72px; border-radius: 50%;
       border: 2px solid var(--accent); object-fit: cover; display: block;
       box-shadow: 0 0 24px var(--glow);
-      transition: filter .2s;
     }
-    .avatar-wrap:hover .avatar { filter: brightness(.6); }
-    .avatar-wrap:hover .avatar-edit { opacity: 1; }
-    .avatar-edit {
-      position: absolute; inset: 0; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; transition: opacity .2s;
-      font-size: .6rem; font-family: 'DM Mono', monospace;
-      color: var(--accent); letter-spacing: .05em;
-      text-transform: uppercase; font-weight: 600;
-      flex-direction: column; gap: 3px;
-    }
-    .avatar-edit svg { width: 18px; height: 18px; }
-    #avatarInput { display: none; }
-
     .avatar-ring {
       position: absolute; inset: -6px; border-radius: 50%;
       border: 1.5px solid rgba(0,220,255,.22);
@@ -249,13 +232,9 @@
 </head>
 <body>
 
-<!-- ⭐ Star cursor -->
 <div id="star-cursor">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <polygon
-      points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"
-      fill="#00dcff"
-    />
+    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#00dcff"/>
   </svg>
 </div>
 
@@ -266,18 +245,11 @@
   <div class="card" id="card">
 
     <div class="top-row">
-      <div class="avatar-wrap" onclick="document.getElementById('avatarInput').click()">
+      <div class="avatar-wrap">
         <img class="avatar" id="avatarImg"
           src="https://api.dicebear.com/7.x/shapes/svg?seed=profile&backgroundColor=001e2a"
           alt="avatar"/>
-        <div class="avatar-edit">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#00dcff" stroke-width="2">
-            <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
-          </svg>
-          edit
-        </div>
         <div class="avatar-ring"></div>
-        <input type="file" id="avatarInput" accept="image/*" onchange="handleAvatar(event)"/>
       </div>
       <div class="info">
         <div class="username" id="usernameEl">YourName</div>
@@ -360,7 +332,7 @@
 const CONFIG = {
   username:  "zyro",
   status:    "online",
-  avatarUrl: "https://imgur.com/a/0W5IauV",  // ← URL hier eintragen
+  profilePicture: "cat3.jpg", 
   namemc:    "lange",
   discord:   "zyrolein",
   discordId: "304354137192267777",
@@ -373,7 +345,6 @@ const CONFIG = {
 /* ━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 document.getElementById('usernameEl').textContent   = CONFIG.username;
- if (CONFIG.avatarUrl) document.getElementById('avatarImg').src = CONFIG.avatarUrl;
 document.getElementById('statusText').textContent   = CONFIG.status;
 document.getElementById('namemcUser').textContent   = CONFIG.namemc;
 document.getElementById('namemcLink').href          = `https://namemc.com/profile/${CONFIG.namemc}`;
@@ -382,15 +353,9 @@ document.getElementById('discordLink').href         = `https://discord.com/users
 document.getElementById('telegramUser').textContent = `@${CONFIG.telegram}`;
 document.getElementById('telegramLink').href        = `https://t.me/${CONFIG.telegram}`;
 
-/* ── Avatar Upload ── */
-function handleAvatar(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    document.getElementById('avatarImg').src = ev.target.result;
-  };
-  reader.readAsDataURL(file);
+// Profilbild setzen
+if (CONFIG.profilePicture && CONFIG.profilePicture.trim() !== '') {
+  document.getElementById('avatarImg').src = CONFIG.profilePicture;
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━
@@ -399,7 +364,6 @@ function handleAvatar(e) {
 const starEl = document.getElementById('star-cursor');
 let mouseX = -200, mouseY = -200;
 
-// Direkt mit requestAnimationFrame updaten — kein transition lag
 function updateCursor() {
   starEl.style.left = mouseX + 'px';
   starEl.style.top  = mouseY + 'px';
@@ -437,7 +401,7 @@ class Spark {
     this.life  = 1;
     this.decay = Math.random() * .028 + .02;
     this.size  = Math.random() * 5 + 1.5;
-    this.type  = Math.random(); // <.4 star | <.72 dot | ring
+    this.type  = Math.random();
   }
   step() {
     this.x += this.vx;
