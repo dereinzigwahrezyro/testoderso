@@ -10,14 +10,14 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #020a0f;
-      --card: rgba(0,220,255,0.04);
-      --border: rgba(0,220,255,0.09);
-      --accent: #00dcff;
-      --accent2: #0070a8;
-      --glow: rgba(0,220,255,0.35);
-      --text: #e8faff;
-      --muted: rgba(160,230,255,0.45);
+      --bg: #080808;
+      --card: rgba(255,255,255,0.03);
+      --border: rgba(255,255,255,0.09);
+      --accent: #ffffff;
+      --accent2: #aaaaaa;
+      --glow: rgba(255,255,255,0.25);
+      --text: #f0f0f0;
+      --muted: rgba(255,255,255,0.4);
     }
 
     html, body {
@@ -34,14 +34,14 @@
       top: -100px; left: -100px;
       width: 24px; height: 24px;
       pointer-events: none;
-      z-index: 999999;
+      z-index: 99999999;
       transform: translate(-50%, -50%);
       will-change: left, top;
     }
     #star-cursor svg {
       width: 100%; height: 100%;
       overflow: visible;
-      filter: drop-shadow(0 0 4px #00dcff) drop-shadow(0 0 10px #00dcff);
+      filter: drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #fff);
       animation: starSpin 3s ease-in-out infinite;
     }
     @keyframes starSpin {
@@ -51,7 +51,7 @@
 
     * { cursor: none !important; }
 
-    #trail-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 999998; }
+    #trail-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 99999998; }
     #bg-canvas    { position: fixed; inset: 0; z-index: 0; }
 
     body::after {
@@ -101,8 +101,17 @@
     .info { transform: translateZ(18px); }
     .username {
       font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em;
-      background: linear-gradient(135deg, #fff 20%, var(--accent));
+      background: linear-gradient(90deg,
+        #ff0000, #ff7700, #ffff00, #00ff00, #00ccff, #7700ff, #ff00cc, #ff0000
+      );
+      background-size: 200% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      animation: rainbowShift 3s linear infinite;
+      display: inline-block;
+    }
+    @keyframes rainbowShift {
+      0%   { background-position: 0% center; }
+      100% { background-position: 200% center; }
     }
     .status {
       margin-top: 4px; font-family: 'DM Mono', monospace;
@@ -111,7 +120,7 @@
     }
     .status-dot {
       width: 7px; height: 7px; border-radius: 50%;
-      background: #4ade80; box-shadow: 0 0 8px #4ade80;
+      background: #ffffff; box-shadow: 0 0 8px #ffffff;
       animation: pulse 2s infinite;
     }
     @keyframes pulse {
@@ -133,9 +142,9 @@
     .vinyl {
       width: 100%; height: 100%; border-radius: 50%;
       background: conic-gradient(
-        #00131a 0deg,#001e2a 30deg,#00131a 60deg,#001e2a 90deg,
-        #00131a 120deg,#001e2a 150deg,#00131a 180deg,#001e2a 210deg,
-        #00131a 240deg,#001e2a 270deg,#00131a 300deg,#001e2a 330deg,#00131a 360deg
+        #0a0a0a 0deg,#1a1a1a 30deg,#0a0a0a 60deg,#1a1a1a 90deg,
+        #0a0a0a 120deg,#1a1a1a 150deg,#0a0a0a 180deg,#1a1a1a 210deg,
+        #0a0a0a 240deg,#1a1a1a 270deg,#0a0a0a 300deg,#1a1a1a 330deg,#0a0a0a 360deg
       );
       border: 2px solid rgba(0,220,255,.1);
       box-shadow: 0 0 30px rgba(0,0,0,.8), 0 0 0 1px rgba(0,220,255,.12);
@@ -216,12 +225,12 @@
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .social-icon svg { width: 16px; height: 16px; }
-    .social-icon.namemc  { background: rgba(76,175,80,.15); }
-    .social-icon.namemc  svg { fill: #4caf50; }
-    .social-icon.discord { background: rgba(88,101,242,.18); }
-    .social-icon.discord svg { fill: #5865f2; }
-    .social-icon.telegram { background: rgba(0,220,255,.12); }
-    .social-icon.telegram svg { fill: var(--accent); }
+    .social-icon.namemc  { background: rgba(255,255,255,0.07); }
+    .social-icon.namemc  svg { fill: #ffffff; }
+    .social-icon.discord { background: rgba(255,255,255,0.07); }
+    .social-icon.discord svg { fill: #ffffff; }
+    .social-icon.telegram { background: rgba(255,255,255,0.07); }
+    .social-icon.telegram svg { fill: #ffffff; }
     .social-sub { margin-left: auto; font-family: 'DM Mono', monospace; font-size: .65rem; color: var(--muted); }
 
     .footer {
@@ -264,7 +273,7 @@
 
 <div id="star-cursor">
   <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#00dcff"/>
+    <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" fill="#ffffff"/>
   </svg>
 </div>
 
@@ -374,7 +383,7 @@ const CONFIG = {
 };
 /* ━━━━━━━━━━━━━━━━━━━━━━━━ */
 
-document.getElementById('usernameEl').textContent   = CONFIG.username;
+document.getElementById('usernameEl').textContent   = '';  // wird per Typewriter-Effekt geschrieben
 document.getElementById('statusText').textContent   = CONFIG.status;
 document.getElementById('namemcUser').textContent   = CONFIG.namemc;
 document.getElementById('namemcLink').href          = `https://namemc.com/profile/${CONFIG.namemc}`;
@@ -391,6 +400,19 @@ if (CONFIG.profilePicture && CONFIG.profilePicture.trim() !== '') {
 // Enter Screen
 function enterSite() {
   document.getElementById('enter-screen').classList.add('hidden');
+  // Typewriter effect für den Namen
+  const el = document.getElementById('usernameEl');
+  const fullName = CONFIG.username;
+  el.textContent = '';
+  let i = 0;
+  function typeNext() {
+    if (i < fullName.length) {
+      el.textContent += fullName[i];
+      i++;
+      setTimeout(typeNext, 85 + Math.random() * 60);
+    }
+  }
+  setTimeout(typeNext, 300);
   // Autoplay ersten Track wenn src gesetzt
   if (CONFIG.tracks[0].src) {
     playing = true;
@@ -432,7 +454,7 @@ function resizeCanvases() {
   bgCanvas.height    = innerHeight;
 }
 
-const CYAN = '#00dcff';
+const CYAN = '#ffffff';
 const trail = [];
 
 class Spark {
@@ -544,8 +566,8 @@ for (let i = 0; i < 65; i++) bgDots.push(new BgDot());
 function bgLoop() {
   bCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
   const g = bCtx.createRadialGradient(innerWidth/2, innerHeight/2, 0, innerWidth/2, innerHeight/2, innerWidth * .55);
-  g.addColorStop(0,   'rgba(0,180,220,.1)');
-  g.addColorStop(.6,  'rgba(0,80,120,.04)');
+  g.addColorStop(0,   'rgba(255,255,255,0.04)');
+  g.addColorStop(.6,  'rgba(180,180,180,.02)');
   g.addColorStop(1,   'transparent');
   bCtx.globalAlpha = 1;
   bCtx.fillStyle = g;
@@ -570,7 +592,7 @@ document.addEventListener('mousemove', e => {
 
 (function tilt() {
   card.style.transform = `rotateY(${mx * 14}deg) rotateX(${-my * 10}deg) scale3d(1.02,1.02,1.02)`;
-  card.style.boxShadow = `${-mx*20}px ${-my*14}px 60px rgba(0,220,255,.2), 0 32px 80px rgba(0,0,0,.7)`;
+  card.style.boxShadow = `${-mx*20}px ${-my*14}px 60px rgba(255,255,255,0.06), 0 32px 80px rgba(0,0,0,.7)`;
   requestAnimationFrame(tilt);
 })();
 
