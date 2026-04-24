@@ -204,7 +204,7 @@
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .social-icon svg { width: 16px; height: 16px; }
-    .social-icon.namemc  { background: rgba(255,255,255,0.07); }
+    .social-icon.namemc  { background: none; }
     .social-icon.namemc  svg { fill: var(--accent); }
     .social-icon.discord { background: rgba(255,255,255,0.07); }
     .social-icon.discord svg { fill: var(--accent); }
@@ -324,7 +324,18 @@
     <div class="socials">
       <a class="social-link" id="namemcLink" href="#" target="_blank">
         <div class="social-icon namemc">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm2 2h2v3l4-3v8l-4-3v3H8V8z"/></svg>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <!-- dark rounded background -->
+            <rect width="24" height="24" rx="5" fill="#1a1a1a"/>
+            <!-- white "n" shape: left pillar -->
+            <rect x="5" y="5" width="4" height="14" fill="white"/>
+            <!-- white "n" shape: right pillar -->
+            <rect x="15" y="5" width="4" height="14" fill="white"/>
+            <!-- white "n" shape: top bridge -->
+            <rect x="5" y="5" width="14" height="4" fill="white"/>
+            <!-- black cutout bottom-center to make the n open at bottom -->
+            <rect x="9" y="9" width="6" height="10" fill="#1a1a1a"/>
+          </svg>
         </div>
         <span>NameMC</span>
         <span class="social-sub" id="namemcUser">YourName</span>
@@ -365,8 +376,8 @@ const CONFIG = {
   telegram:  "neakly",
   tracks: [
     { title: "God like", artist: "summrs", src: "God_Like_KLICKAUD.mp3", cover: "godlike.jpg" },
-    { title: "NOSTYLIST",    artist: "Destroy lonley", src: "NOSTYLIST_spotdown.org.mp3", cover: "cover1.jpg" },
-    { title: "Fighting Ny Demons",    artist: "Ken Carson", src: "Fighting My Demons_spotdown.org.mp3", cover: "demons.jpg" },
+    { title: "NOSTYLIST", artist: "Destroy lonley", src: "NOSTYLIST_spotdown.org.mp3", cover: "cover1.jpg" },
+    { title: "Fighting Ny Demons", artist: "Ken Carson", src: "Fighting My Demons_spotdown.org.mp3", cover: "demons.jpg" },
   ]
 };
 /* ━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -574,7 +585,7 @@ async function initViewCounter() {
     await window.storage.set('profileViews', String(views), true);
     document.getElementById('viewCount').textContent = `✦ ${views.toLocaleString()} views`;
   } catch(e) {
-    document.getElementById('viewCount').textContent = '3193 views';
+    document.getElementById('viewCount').textContent = '✦ views';
   }
 }
 initViewCounter();
